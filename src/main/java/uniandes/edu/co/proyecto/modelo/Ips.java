@@ -8,7 +8,7 @@ import jakarta.persistence.Table;
 @Table(name = "ips")
 public class Ips {
     @Id
-    private Integer NIT;
+    private Integer nit;
 
     private String nombre;
 
@@ -18,8 +18,8 @@ public class Ips {
 
     private Integer telefono;
 
-    public Ips(Integer NIT, String nombre, String tipo, String direccion, Integer telefono) {
-        this.NIT = NIT;
+    public Ips(Integer nit, String nombre, String tipo, String direccion, Integer telefono) {
+        this.nit = nit;
         this.nombre = nombre;
         this.tipo = tipo;
         this.direccion = direccion;
@@ -28,8 +28,8 @@ public class Ips {
 
     public Ips() {;}
 
-    public Integer getNIT() {
-        return NIT;
+    public Integer getNit() {
+        return nit;
     }
 
     public String getNombre() {
@@ -48,8 +48,8 @@ public class Ips {
         return telefono;
     }
 
-    public void setNIT(Integer Nit) {
-        this.NIT = Nit;
+    public void setNIT(Integer nit) {
+        this.nit = nit;
     }
 
     public void setNombre(String nombre) {

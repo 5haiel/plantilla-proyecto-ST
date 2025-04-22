@@ -11,6 +11,7 @@ import uniandes.edu.co.proyecto.modelo.Ips;
 import uniandes.edu.co.proyecto.repositorio.IpsRepository;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -33,9 +34,8 @@ public class IpsController {
     }
     
     @PostMapping("/ips/new/save")
-    public String ipsGuardar(@ModelAttribute Ips ips) {
-        System.out.println("recieved ips: " + ips.getNIT());
-        ipsRepository.insertarIps(ips.getNIT(), ips.getNombre(), ips.getTipo(), ips.getDireccion(), ips.getTelefono());
+    public String ipsGuardar(@RequestBody Ips ips) {
+        ipsRepository.insertarIps(ips.getNit(), ips.getNombre(), ips.getTipo(), ips.getDireccion(), ips.getTelefono());
         return "redirect:/ips";
     }
     
