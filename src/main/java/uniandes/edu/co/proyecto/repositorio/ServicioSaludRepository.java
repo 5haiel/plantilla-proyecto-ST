@@ -17,6 +17,7 @@ public interface ServicioSaludRepository extends JpaRepository<ServicioSalud, Lo
     @Query(value = "SELECT * FROM servicio_salud WHERE idservicio = :id", nativeQuery = true)
     ServicioSalud darServicio(@Param("id") Integer id);
 
+    // RF2: Registrar Servicio de Salud
     @Modifying
     @Transactional
     @Query(value = "INSERT INTO servicio_salud (idservicio, tiposervicio, descripcion, servicio_salud_id) VALUES (:idservicio, :tiposervicio, :descripcion, :servicio_salud_id)", nativeQuery = true)
