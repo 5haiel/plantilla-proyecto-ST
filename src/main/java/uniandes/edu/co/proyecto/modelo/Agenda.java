@@ -24,6 +24,7 @@ public class Agenda {
     private DirectorioMedico directorioMedico;
 
     @ManyToOne
+    @JoinColumn(name = "id_so", referencedColumnName = "id_so")
     private ServicioOrden servicioOrden;
 
     @ManyToOne
