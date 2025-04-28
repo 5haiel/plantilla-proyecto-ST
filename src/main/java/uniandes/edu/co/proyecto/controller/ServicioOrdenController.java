@@ -33,7 +33,7 @@ public class ServicioOrdenController {
 
     @PostMapping("/serviciosorden/new/save")
     public String serviciosOrdenGuardar(@RequestBody ServicioOrden servicioOrden) {
-        servicioOrdenRepository.insertarServicioOrden(servicioOrden.getPk().getIdservicioorden(), servicioOrden.getOrden().getPk().getIdorden(), servicioOrden.getOrden().getPk().getMedicoid().getNumRegistroMedico(), servicioOrden.getServiciosalud().getServicioSaludId());
+        servicioOrdenRepository.insertarServicioOrden(servicioOrden.getPk(), servicioOrden.getOrden().getPk().getIdorden(), servicioOrden.getOrden().getPk().getMedicoid().getNumRegistroMedico(), servicioOrden.getServiciosalud().getServicioSaludId());
         return "redirect:/serviciosorden";
     }
 
@@ -50,7 +50,7 @@ public class ServicioOrdenController {
 
     @PostMapping("/serviciosorden/{id}/edit/save")
     public String serviciosOrdenEditarGuardar(@PathVariable("id") Integer id, @ModelAttribute ServicioOrden servicioOrden) {
-        servicioOrdenRepository.actualizarServicioOrden(servicioOrden.getPk().getIdservicioorden(), servicioOrden.getOrden().getPk().getIdorden(), servicioOrden.getOrden().getPk().getMedicoid().getNumRegistroMedico(), servicioOrden.getServiciosalud().getServicioSaludId());
+        servicioOrdenRepository.actualizarServicioOrden(servicioOrden.getPk(), servicioOrden.getOrden().getPk().getIdorden(), servicioOrden.getOrden().getPk().getMedicoid().getNumRegistroMedico(), servicioOrden.getServiciosalud().getServicioSaludId());
         return "redirect:/serviciosorden";
     }
 

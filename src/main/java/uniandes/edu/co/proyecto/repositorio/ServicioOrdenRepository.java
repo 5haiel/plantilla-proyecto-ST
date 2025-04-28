@@ -9,9 +9,8 @@ import org.springframework.data.repository.query.Param;
 
 import jakarta.transaction.Transactional;
 import uniandes.edu.co.proyecto.modelo.ServicioOrden;
-import uniandes.edu.co.proyecto.modelo.ServicioOrdenPK;
 
-public interface ServicioOrdenRepository extends JpaRepository<ServicioOrden, ServicioOrdenPK> {
+public interface ServicioOrdenRepository extends JpaRepository<ServicioOrden, Integer> {
 
     @Query(value = "SELECT * FROM servicio_orden", nativeQuery = true)
     Collection<ServicioOrden> darAllServicioOrdenes();

@@ -1,7 +1,8 @@
 package uniandes.edu.co.proyecto.modelo;
 
-import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinColumns;
 import jakarta.persistence.ManyToOne;
@@ -11,8 +12,9 @@ import jakarta.persistence.Table;
 @Table(name = "servicio_orden")
 public class ServicioOrden {
 
-    @EmbeddedId
-    private ServicioOrdenPK pk;
+    @Id
+    @Column(name = "id_so")
+    private Integer pk;
 
     @ManyToOne
     @JoinColumns({
@@ -26,7 +28,7 @@ public class ServicioOrden {
     @JoinColumn(name = "idservicio", referencedColumnName = "idservicio")
     private ServicioSalud serviciosalud;
 
-    public ServicioOrden(ServicioOrdenPK pk, Orden orden, ServicioSalud serviciosalud) {
+    public ServicioOrden(Integer pk, Orden orden, ServicioSalud serviciosalud) {
         this.pk = pk;
         this.orden = orden;
         this.serviciosalud = serviciosalud;
@@ -34,11 +36,11 @@ public class ServicioOrden {
 
     public ServicioOrden() {;}
 
-    public ServicioOrdenPK getPk() {
+    public Integer getPk() {
         return pk;
     }
 
-    public void setPk(ServicioOrdenPK pk) {
+    public void setPk(Integer pk) {
         this.pk = pk;
     }
 

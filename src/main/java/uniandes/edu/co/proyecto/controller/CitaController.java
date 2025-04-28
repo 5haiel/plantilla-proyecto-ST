@@ -30,7 +30,7 @@ public class CitaController {
     
     @PostMapping("/citas/new/save")
     public String citaGuardar(Cita cita) {
-        citaRepository.insertarCita(cita.getPk().getIdcita(), cita.getPk().getServicioordenid().getPk().getIdservicioorden(), cita.getPk().getUsuarioid().getUsuarioid(), cita.getEstado(), cita.getFecha(), cita.getDisponibilidad());
+        citaRepository.insertarCita(cita.getPk().getIdcita(), cita.getPk().getServicioordenid().getPk(), cita.getPk().getUsuarioid().getUsuarioid(), cita.getEstado(), cita.getFecha(), cita.getDisponibilidad());
         return "redirect:/citas";
     }
 
@@ -47,7 +47,7 @@ public class CitaController {
 
     @PostMapping("/citas/{id_cita}/{id_servicioorden}/{id_usuario}/edit/save")
     public String citaEditarGuardar(Integer id_cita, Integer id_servicioorden, Integer id_usuario, Cita cita) {
-        citaRepository.actualizarCita(cita.getPk().getIdcita(), cita.getPk().getServicioordenid().getPk().getIdservicioorden(), cita.getPk().getUsuarioid().getUsuarioid(), cita.getEstado(), cita.getFecha(), cita.getDisponibilidad());
+        citaRepository.actualizarCita(cita.getPk().getIdcita(), cita.getPk().getServicioordenid().getPk(), cita.getPk().getUsuarioid().getUsuarioid(), cita.getEstado(), cita.getFecha(), cita.getDisponibilidad());
         return "redirect:/citas";
     }
 

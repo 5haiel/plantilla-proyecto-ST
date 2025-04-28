@@ -16,7 +16,7 @@ public class CitaPK implements Serializable {
     private Usuario usuarioid;
 
     @ManyToOne
-    @JoinColumn(name = "ID", referencedColumnName = "idservicioorden")
+    @JoinColumn(name = "id_so", referencedColumnName = "id_so")
     private ServicioOrden servicioordenid;
 
     public CitaPK(Integer idcita, Usuario usuarioid, ServicioOrden servicioordenid) {
