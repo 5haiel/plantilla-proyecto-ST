@@ -13,15 +13,13 @@ public class ServicioOrdenPK implements Serializable {
         this.idservicioorden = idservicioorden;
     }
 
-    public ServicioOrdenPK() {
-        super();
-    }
+    public ServicioOrdenPK() {;}
 
     public Integer getIdservicioorden() {
         return idservicioorden;
     }
 
-    public void setIdservicioorden(Integer idservicioorden) {
-        this.idservicioorden = idservicioorden;
+    public void setIdservicioorden(Integer id_servicioorden) {
+        this.idservicioorden = id_servicioorden;
     }
 }
