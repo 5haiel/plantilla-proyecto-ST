@@ -64,11 +64,11 @@ public class Agenda {
         this.directorioMedico = directorioMedico;
     }
 
-    public ServicioOrden getServicioSalud() {
+    public ServicioOrden getServicioOrden() {
         return servicioOrden;
     }
 
-    public void setServicioSalud(ServicioOrden servicioOrden) {
+    public void setServicioOrden(ServicioOrden servicioOrden) {
         this.servicioOrden = servicioOrden;
     }
 

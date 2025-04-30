@@ -34,7 +34,7 @@ public class OrdenController {
 
     @PostMapping("/orden/new/save")
     public String ordenGuardar(@RequestBody Orden orden) {
-        ordenRepository.insertarOrden(orden.getPk().getIdorden(), orden.getPk().getMedicoid().getNumeroDocumento(), orden.getPk().getUsuarioid().getUsuarioid(), orden.getFechaemision(), orden.getEstado());
+        ordenRepository.insertarOrden(orden.getPk().getIdorden(), orden.getPk().getMedicoid().getNumRegistroMedico(), orden.getPk().getUsuarioid().getUsuarioid(), orden.getFechaemision(), orden.getEstado());
         return "redirect:/orden";
     }
 
@@ -55,7 +55,7 @@ public class OrdenController {
         return "redirect:/orden";
     }
 
-    @DeleteMapping("/orden/{id}/delete")
+    @DeleteMapping("/orden/{id_orden}/{id_usuario}/{id_medico}/delete")
     public String ordenEliminar(@PathVariable("id_orden") Integer id_orden, @PathVariable("id_usuario") Integer id_usuario, @PathVariable("id_medico") Integer id_medico, Model model) {
         ordenRepository.eliminarOrden(id_orden, id_medico, id_usuario);
         return "redirect:/orden";

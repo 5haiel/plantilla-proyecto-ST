@@ -14,7 +14,7 @@ public class ServicioOrden {
 
     @Id
     @Column(name = "id_so")
-    private Integer pk;
+    private Integer id_so;
 
     @ManyToOne
     @JoinColumns({
@@ -29,7 +29,7 @@ public class ServicioOrden {
     private ServicioSalud serviciosalud;
 
     public ServicioOrden(Integer pk, Orden orden, ServicioSalud serviciosalud) {
-        this.pk = pk;
+        this.id_so = pk;
         this.orden = orden;
         this.serviciosalud = serviciosalud;
     }
@@ -37,11 +37,11 @@ public class ServicioOrden {
     public ServicioOrden() {;}
 
     public Integer getPk() {
-        return pk;
+        return id_so;
     }
 
     public void setPk(Integer pk) {
-        this.pk = pk;
+        this.id_so = pk;
     }
 
     public Orden getOrden() {
