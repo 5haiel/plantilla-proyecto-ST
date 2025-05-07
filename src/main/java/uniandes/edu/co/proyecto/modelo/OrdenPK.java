@@ -12,11 +12,11 @@ public class OrdenPK implements Serializable {
     private Integer idorden;
 
     @ManyToOne
-    @JoinColumn(name = "numregistromedico", referencedColumnName = "numregistromedico")
+    @JoinColumn(name = "medico_numregistromedico", referencedColumnName = "numregistromedico")
     private Medico medicoid;
 
     @ManyToOne
-    @JoinColumn(name = "usuarioid", referencedColumnName = "usuarioid")
+    @JoinColumn(name = "usuario_usuario_id", referencedColumnName = "usuarioid")
     private Usuario usuarioid;
 
     public OrdenPK(Integer idorden, Medico medicoid, Usuario usuarioid) {

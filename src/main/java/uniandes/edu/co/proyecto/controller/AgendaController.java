@@ -85,7 +85,11 @@ public class AgendaController {
     }
     
     @PostMapping("/agenda/agendar")
-    public String agendarServicio(@RequestParam Integer idAgenda, @RequestParam Integer idOrden, @RequestParam Integer idMedico, @RequestParam Integer idUsuario) {
+    public String agendarServicio(
+        @RequestParam Integer idAgenda, 
+        @RequestParam Integer idOrden, 
+        @RequestParam(required = false) Integer idMedico, 
+        @RequestParam(required = false) Integer idUsuario) {
         try {
             agendaServicio.agendarServicio(idAgenda, idOrden, idMedico, idUsuario);
             return "Servicio agendado exitosamente.";

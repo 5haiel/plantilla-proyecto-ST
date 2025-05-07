@@ -19,8 +19,8 @@ public class ServicioOrden {
     @ManyToOne
     @JoinColumns({
         @JoinColumn(name = "id", referencedColumnName = "idorden"),
-        @JoinColumn(name = "numregistromedico", referencedColumnName = "numregistromedico"),
-        @JoinColumn(name = "usuarioid", referencedColumnName = "usuarioid")
+        @JoinColumn(name = "orden_numregistromedico", referencedColumnName = "medico_numregistromedico"),
+        @JoinColumn(name = "usuario_usuario_id", referencedColumnName = "usuario_usuario_id")
     })
     private Orden orden;
 
