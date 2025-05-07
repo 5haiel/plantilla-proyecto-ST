@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import uniandes.edu.co.proyecto.modelo.Agenda;
 import uniandes.edu.co.proyecto.modelo.Orden;
 import uniandes.edu.co.proyecto.repositorio.AgendaRepository;
+import uniandes.edu.co.proyecto.repositorio.AgendaRepository.RespuestaDisponibilidadServicio;
 import uniandes.edu.co.proyecto.repositorio.OrdenRepository;
 
 @Service
@@ -26,19 +27,19 @@ public class AgendaServicio {
     
     @Transactional(rollbackFor = Exception.class, isolation = Isolation.READ_COMMITTED)
     public void agendarServicio(Integer idAgenda, Integer idOrden, Integer idMedico, Integer idUsuario) throws Exception {
-        // Step 1: Confirm availability with locking
+        // Confirma disponibilidad con candado
         Agenda agenda = agendaRepository.darAgendaPorIdCandado(idAgenda);
         if (agenda == null || !agenda.getDisponibilidad().equalsIgnoreCase("Disponible")) {
             throw new Exception("El servicio no está disponible.");
         }
 
-        // Step 2: Validate the service order
+        // Valida la orden
         Orden orden = ordenRepository.darOrden(idOrden, idMedico, idUsuario);
         if (orden == null) {
             throw new Exception("La orden de servicio no existe.");
         }
 
-        // Step 3: Schedule the service
+        // Agenda el servicio
         agendaRepository.actualizarAgenda(
             agenda.getFecha(),
             "Reservado",
@@ -53,20 +54,20 @@ public class AgendaServicio {
     }
 
     @Transactional(isolation = Isolation.SERIALIZABLE, rollbackFor = Exception.class, readOnly = true)
-    public Collection<Agenda> consultarDisponibilidadSerializable(Integer idServicio, LocalDate startDate, LocalDate endDate, Integer idMedico) throws InterruptedException {
+    public Collection<RespuestaDisponibilidadServicio> consultarDisponibilidadSerializable(Integer idServicio, LocalDate startDate, LocalDate endDate, Integer idMedico) throws InterruptedException {
         try {
             Thread.sleep(30000); // Simulate a 30-second delay
-            return agendaRepository.darAgendasPorRangoDeFechasYServicio(idServicio, startDate, endDate);
+            return agendaRepository.consultarDisponibilidadSerializable(idServicio, startDate, endDate, idMedico);
         } catch (Exception e) {
             throw new RuntimeException("Error al consultar la disponibilidad: " + e.getMessage());
         }
     }
 
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class, readOnly = true)
-    public Collection<Agenda> consultarDisponibilidadReadCommitted(Integer idServicio, LocalDate startDate, LocalDate endDate, Integer idMedico) throws InterruptedException {
+    public Collection<RespuestaDisponibilidadServicio> consultarDisponibilidadReadCommitted(Integer idServicio, LocalDate startDate, LocalDate endDate, Integer idMedico) throws InterruptedException {
         try {
             Thread.sleep(30000); // Simulate a 30-second delay
-            return agendaRepository.darAgendasPorRangoDeFechasYServicio(idServicio, startDate, endDate);
+            return agendaRepository.consultarDisponibilidadSerializable(idServicio, startDate, endDate, idMedico);
         } catch (Exception e) {
             throw new RuntimeException("Error al consultar la disponibilidad: " + e.getMessage());
         }

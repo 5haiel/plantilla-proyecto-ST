@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import uniandes.edu.co.proyecto.modelo.Agenda;
 import uniandes.edu.co.proyecto.repositorio.AgendaRepository;
+import uniandes.edu.co.proyecto.repositorio.AgendaRepository.RespuestaDisponibilidadServicio;
 import uniandes.edu.co.proyecto.servicios.AgendaServicio;
 
 @RestController
@@ -94,23 +95,33 @@ public class AgendaController {
     }
     
     @GetMapping("/agenda/disponibilidad/serializable")
-    public Collection<Agenda> consultarDisponibilidadSerializable(
+    public Collection<RespuestaDisponibilidadServicio> consultarDisponibilidadSerializable(
         @RequestParam(required = false) Integer idServicio,
         @RequestParam LocalDate startDate,
         @RequestParam LocalDate endDate,
         @RequestParam(required = false) Integer idMedico
-    ) throws InterruptedException {
-        return agendaServicio.consultarDisponibilidadSerializable(idServicio, startDate, endDate, idMedico);
+    ) throws InterruptedException {  
+        try {
+            Collection<RespuestaDisponibilidadServicio> disponibilidad = agendaServicio.consultarDisponibilidadSerializable(idServicio, startDate, endDate, idMedico);
+            return disponibilidad;
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error: " + e.getMessage());
+        }
     }
     
     @GetMapping("/agenda/disponibilidad/read-committed")
-    public Collection<Agenda> consultarDisponibilidadReadCommitted(
+    public Collection<RespuestaDisponibilidadServicio> consultarDisponibilidadReadCommitted(
         @RequestParam(required = false) Integer idServicio,
         @RequestParam LocalDate startDate,
         @RequestParam LocalDate endDate,
         @RequestParam(required = false) Integer idMedico
     ) throws InterruptedException {
-        return agendaServicio.consultarDisponibilidadReadCommitted(idServicio, startDate, endDate, idMedico);
+        try {
+            Collection<RespuestaDisponibilidadServicio> disponibilidad = agendaServicio.consultarDisponibilidadReadCommitted(idServicio, startDate, endDate, idMedico);
+            return disponibilidad;
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error: " + e.getMessage());
+        }
     }
     
 }
