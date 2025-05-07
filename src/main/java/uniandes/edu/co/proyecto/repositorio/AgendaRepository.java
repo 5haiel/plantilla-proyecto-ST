@@ -16,10 +16,14 @@ public interface AgendaRepository extends JpaRepository<Agenda, Integer> {
     @Query(value = "SELECT * FROM agenda", nativeQuery = true)
     Collection<Agenda> darAllAgendas();
 
-    @Query(value = "SELECT * FROM agenda WHERE id = :id", nativeQuery = true)
-    Agenda darAgendaPorId(Integer id);
+    @Query(value = "SELECT * FROM agenda WHERE idagenda = :id", nativeQuery = true)
+    Agenda darAgendaPorId(@Param("id") Integer id);
 
-    @Query(value = "SELECT * FROM agenda WHERE id = :id AND fecha = :fecha", nativeQuery = true)
+    // Candado
+    @Query(value = "SELECT * FROM agenda WHERE idagenda = :id FOR UPDATE", nativeQuery = true)
+    Agenda darAgendaPorIdCandado(@Param("id") Integer id);
+
+    @Query(value = "SELECT * FROM agenda WHERE idagenda = :id AND fecha = :fecha", nativeQuery = true)
     Agenda darAgendaPorIdYFecha(@Param("id") Integer id, @Param("fecha") LocalDate fecha);
 
     // RF7: Agendar un servicio de salud por parte de un afiliado
@@ -32,21 +36,21 @@ public interface AgendaRepository extends JpaRepository<Agenda, Integer> {
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE agenda SET fecha = :fecha, disponibilidad = :disponibilidad, directorio_servicio_nit = :directorio_servicio_nit, directorio_servicio_serv_id = :directorio_servicio_serv_id, directorio_medico_nit = :directorio_medico_nit, directorio_medico_regmed = :directorio_medico_regmed, servicio_medico_regmed = :servicio_medico_regmed, servicio_medico_serv_id = :servicio_medico_serv_id WHERE id = :id AND disponibilidad = 'Disponible' ", nativeQuery = true)
+    @Query(value = " UPDATE agenda SET fecha = :fecha, disponibilidad = :disponibilidad, directorio_servicio_nit = :directorio_servicio_nit, directorio_servicio_serv_id = :directorio_servicio_serv_id, directorio_medico_nit = :directorio_medico_nit, directorio_medico_regmed = :directorio_medico_regmed, servicio_medico_regmed = :servicio_medico_regmed, servicio_medico_serv_id = :servicio_medico_serv_id WHERE id = :id AND disponibilidad = 'Disponible' ", nativeQuery = true)
     void actualizarAgendaPorDisponibilidad(@Param("fecha") LocalDate fecha, @Param("disponibilidad") String disponibilidad, @Param("directorio_servicio_nit") Integer directorio_servicio_nit, @Param("directorio_servicio_serv_id") Integer directorio_servicio_serv_id, @Param("directorio_medico_nit") Integer directorio_medico_nit, @Param("directorio_medico_regmed") Integer directorio_medico_regmed, @Param("servicio_medico_regmed") Integer servicio_medico_regmed, @Param("servicio_medico_serv_id") Integer servicio_medico_serv_id, @Param("id") Integer id);
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO agenda (fecha, disponibilidad, directorio_servicio_nit, directorio_servicio_serv_id, directorio_medico_nit, directorio_medico_regmed, servicio_medico_regmed, servicio_medico_serv_id, id) VALUES (:fecha, :disponibilidad, :directorio_servicio_nit, :directorio_servicio_serv_id, :directorio_medico_nit, :directorio_medico_regmed, :servicio_medico_regmed, :servicio_medico_serv_id, :id)", nativeQuery = true)
+    @Query(value = "INSERT INTO agenda (fecha, disponibilidad, directorio_servicio_nit, directorio_servicio_serv_id, directorio_medico_nit, directorio_medico_regmed, servicio_medico_regmed, servicio_medico_serv_id, idagenda) VALUES (:fecha, :disponibilidad, :directorio_servicio_nit, :directorio_servicio_serv_id, :directorio_medico_nit, :directorio_medico_regmed, :servicio_medico_regmed, :servicio_medico_serv_id, :id)", nativeQuery = true)
     void insertarAgenda(@Param("fecha") LocalDate fecha, @Param("disponibilidad") String disponibilidad, @Param("directorio_servicio_nit") Integer directorio_servicio_nit, @Param("directorio_servicio_serv_id") Integer directorio_servicio_serv_id, @Param("directorio_medico_nit") Integer directorio_medico_nit, @Param("directorio_medico_regmed") Integer directorio_medico_regmed, @Param("servicio_medico_regmed") Integer servicio_medico_regmed, @Param("servicio_medico_serv_id") Integer servicio_medico_serv_id, @Param("id") Integer id);
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE agenda SET fecha = :fecha, disponibilidad = :disponibilidad, directorio_servicio_nit = :directorio_servicio_nit, directorio_servicio_serv_id = :directorio_servicio_serv_id, directorio_medico_nit = :directorio_medico_nit, directorio_medico_regmed = :directorio_medico_regmed, servicio_medico_regmed = :servicio_medico_regmed, servicio_medico_serv_id = :servicio_medico_serv_id WHERE id = :id", nativeQuery = true)
+    @Query(value = "UPDATE agenda SET fecha = :fecha, disponibilidad = :disponibilidad, directorio_servicio_nit = :directorio_servicio_nit, directorio_servicio_serv_id = :directorio_servicio_serv_id, directorio_medico_nit = :directorio_medico_nit, directorio_medico_regmed = :directorio_medico_regmed, servicio_medico_regmed = :servicio_medico_regmed, servicio_medico_serv_id = :servicio_medico_serv_id WHERE idagenda = :id", nativeQuery = true)
     void actualizarAgenda(@Param("fecha") LocalDate fecha, @Param("disponibilidad") String disponibilidad, @Param("directorio_servicio_nit") Integer directorio_servicio_nit, @Param("directorio_servicio_serv_id") Integer directorio_servicio_serv_id, @Param("directorio_medico_nit") Integer directorio_medico_nit, @Param("directorio_medico_regmed") Integer directorio_medico_regmed, @Param("servicio_medico_regmed") Integer servicio_medico_regmed, @Param("servicio_medico_serv_id") Integer servicio_medico_serv_id, @Param("id") Integer id);
 
     @Modifying
     @Transactional
-    @Query(value = "DELETE FROM agenda WHERE id = :id", nativeQuery = true)
+    @Query(value = "DELETE FROM agenda WHERE idagenda = :id", nativeQuery = true)
     void eliminarAgenda(@Param("id") Integer id);
 }
