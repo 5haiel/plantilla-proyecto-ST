@@ -99,5 +99,18 @@ public class Agenda {
         this.disponibilidad = disponibilidad;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Agenda{" +
+                "idagenda=" + idagenda +
+                ", directorioMedicoRegMed=" + directorioMedico.getPk().getNum_registromedico().getNumRegistroMedico() +
+                ", directorioMedicoNit=" + directorioMedico.getPk().getId_Ips().getNit() +
+                ", serviciosMedicoServId=" + serviciosMedico.getPk().getId_serviciosalud().getServicioSaludId() +
+                ", serviciosMedicoRegMed=" + serviciosMedico.getPk().getId_medico().getNumRegistroMedico() +
+                ", directorioServicioServId=" + directorioServicio.getPk().getId_serviciosalud().getServicioSaludId() +
+                ", directorioServicioNit=" + directorioServicio.getPk().getId_ips().getNit() +
+                ", fecha=" + fecha +
+                ", disponibilidad='" + disponibilidad + '\'' +
+                '}';
+    }
 }

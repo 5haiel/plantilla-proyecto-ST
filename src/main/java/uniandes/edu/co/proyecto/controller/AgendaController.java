@@ -78,7 +78,8 @@ public class AgendaController {
     public String consultarDisponibilidad(@PathVariable("id_servicio") Integer idServicio, Model model) {
         LocalDate today = LocalDate.now();
         LocalDate fourWeeksLater = today.plusWeeks(4);
-        agendaRepository.darAgendasPorRangoDeFechasYServicio(idServicio, today, fourWeeksLater);
+        //agendaRepository.darAgendasPorRangoDeFechasYServicio(idServicio, today, fourWeeksLater);
+        model.addAttribute("agenda",agendaRepository.darAgendasPorRangoDeFechasYServicio(idServicio, today, fourWeeksLater));
         return model.toString();
     }
     

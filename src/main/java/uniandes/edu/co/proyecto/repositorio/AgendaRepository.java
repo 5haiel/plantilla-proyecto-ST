@@ -27,7 +27,7 @@ public interface AgendaRepository extends JpaRepository<Agenda, Integer> {
     Agenda darAgendaPorIdYFecha(@Param("id") Integer id, @Param("fecha") LocalDate fecha);
 
     // RF7: Agendar un servicio de salud por parte de un afiliado
-    @Query(value = "SELECT * FROM agenda WHERE fecha BETWEEN :startDate AND :endDate", nativeQuery = true)
+    @Query(value = "SELECT * FROM agenda WHERE disponibilidad = 'Disponible' AND fecha BETWEEN :startDate AND :endDate", nativeQuery = true)
     Collection<Agenda> darAgendasPorRangoDeFechas(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
     @Query(value = "SELECT * FROM agenda WHERE disponibilidad = 'Disponible' AND directorio_servicio_serv_id = :idServicio AND fecha BETWEEN :startDate AND :endDate", nativeQuery = true)
