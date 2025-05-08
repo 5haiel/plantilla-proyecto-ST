@@ -40,9 +40,6 @@ public class AgendaServicio {
 
             // Valida la orden
             Orden orden = ordenRepository.darOrden(idOrden, idMedico, idUsuario);
-            System.out.println(idOrden);
-            System.out.println(idMedico);
-            System.out.println(idUsuario);
             if (orden == null) {
                 throw new Exception("La orden de servicio no existe o no está asociada al médico y usuario indicados.");
             }
@@ -75,12 +72,14 @@ public class AgendaServicio {
         }
     }
 
-    @Transactional(isolation = Isolation.SERIALIZABLE, rollbackFor = Exception.class)
+    @Transactional(isolation = Isolation.SERIALIZABLE, rollbackFor = Exception.class, readOnly = true)
     public Collection<RespuestaDisponibilidadServicio> consultarDisponibilidadSerializable(Integer idServicio, LocalDate startDate, LocalDate endDate, Integer idMedico) throws InterruptedException {
         try {
-            agendaRepository.consultarDisponibilidadSerializable(idServicio, startDate, endDate, idMedico);
+            Collection<RespuestaDisponibilidadServicio> agendas = agendaRepository.consultarDisponibilidadSerializable(idServicio, startDate, endDate, idMedico);
+            System.out.println(agendas.size());
             Thread.sleep(30000); //Delay de 30 segundos
-            return agendaRepository.consultarDisponibilidadSerializable(idServicio, startDate, endDate, idMedico);
+            agendas = agendaRepository.consultarDisponibilidadSerializable(idServicio, startDate, endDate, idMedico);
+            return agendas;
         } catch (Exception e) {
             throw new RuntimeException("Error al consultar la disponibilidad: " + e.getMessage());
         }
@@ -89,9 +88,11 @@ public class AgendaServicio {
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class, readOnly = true)
     public Collection<RespuestaDisponibilidadServicio> consultarDisponibilidadReadCommitted(Integer idServicio, LocalDate startDate, LocalDate endDate, Integer idMedico) throws InterruptedException {
         try {
-            agendaRepository.consultarDisponibilidadReadCommitted(idServicio, startDate, endDate, idMedico);
+            Collection<RespuestaDisponibilidadServicio> agendas = agendaRepository.consultarDisponibilidadReadCommitted(idServicio, startDate, endDate, idMedico);
+            System.out.println(agendas.size());
             Thread.sleep(30000); // Delay de 30 segundos
-            return agendaRepository.consultarDisponibilidadReadCommitted(idServicio, startDate, endDate, idMedico);
+            agendas = agendaRepository.consultarDisponibilidadReadCommitted(idServicio, startDate, endDate, idMedico);
+            return agendas;
         } catch (Exception e) {
             throw new RuntimeException("Error al consultar la disponibilidad: " + e.getMessage());
         }
