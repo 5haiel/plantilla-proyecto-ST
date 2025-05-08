@@ -1,0 +1,439 @@
+{
+	"info": {
+		"_postman_id": "bd830a58-de40-4c49-aba8-161e0ec1eafd",
+		"name": "Sistrans Tests",
+		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Scripts\" tab**\n\nAdding tests to your requests can help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/fa30ea0a-373d-4545-a668-e7b283cca343/aW1hZ2UucG5n\" alt=\"\" height=\"1530\" width=\"2162\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n    \n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "41562379"
+	},
+	"item": [
+		{
+			"name": "Obtener IPS",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/ips"
+			},
+			"response": []
+		},
+		{
+			"name": "Guardar IPS (RF1)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nit\": 100000001,\n    \"nombre\": \"Clinica Andes\",\n    \"tipo\": \"Hospital\",\n    \"direccion\": \"Calle 123 #45-67\",\n    \"telefono\": 1001234567\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/ips/new/save"
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar IPS",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:8080/ips/123456789/delete"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Servicios",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/servicios"
+			},
+			"response": []
+		},
+		{
+			"name": "Guardar Servicio (RF2)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"idServicio\": 525,\n    \"tipoServicio\": \"Examen Diagnóstico\",\n    \"descripcion\": \"TAC\",\n    \"servicioSaludId\": 525\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/servicios/new/save"
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Servicio",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:8080/servicios/506/delete"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Medicos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/medicos"
+			},
+			"response": []
+		},
+		{
+			"name": "Guardar Medico (RF 4)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"numRegistroMedico\": 12345,\n    \"numeroDocumento\": 987654321,\n    \"tipoDocumento\": \"CC\",\n    \"especialidad\": \"Cardiología\",\n    \"nombre\": \"Dr. Juan Pérez\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/medicos/new/save"
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Medico",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:8080/medicos/12345/delete"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Usuarios",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/usuarios"
+			},
+			"response": []
+		},
+		{
+			"name": "Guardar Usuario (RF 5)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"tipodocumento\": \"CC\",\n    \"numdocumento\": 10287659,\n    \"nombre\": \"Juan Perez\",\n    \"fechanacimiento\": \"1990-05-15\",\n    \"telefono\": 1001234567,\n    \"tipocontribucion\": \"Contribuyente\",\n    \"usuarioid\": 50\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/usuarios/new/save"
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Usuario",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:8080/usuarios/6/delete"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Directorio Servicio",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/directorio_servicio"
+			},
+			"response": []
+		},
+		{
+			"name": "Guardar Directorio Servicio (RF3)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"pk\": {\n        \"id_ips\": {\n            \"nit\": 900666777\n        },\n        \"id_serviciosalud\": {\n            \"idServicio\": 504\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/directorio_servicio/new/save"
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Directorio Servicio",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:8080/directorio_servicio/100000000/504/delete"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Orden",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/orden"
+			},
+			"response": []
+		},
+		{
+			"name": "Guardar Orden (RF 6)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"pk\": {\n        \"idorden\": 240,\n        \"medicoid\": {\n            \"numRegistroMedico\": 1001\n        },\n        \"usuarioid\": {\n            \"usuarioid\": 15\n        }\n    },\n    \"fechaemision\": \"2025-05-29\",\n    \"estado\": \"Pendiente\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/orden/new/save"
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Orden",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:8080/orden/220/1001/15/delete"
+			},
+			"response": []
+		},
+		{
+			"name": "Guardar Agenda (RF 7)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"idagenda\": 18,\n    \"fecha\": \"2025-05-01\",\n    \"disponibilidad\": \"Disponible\",\n    \"directorioServicio\": {\n        \"pk\": {\n            \"id_ips\": {\n                \"nit\": 900111222\n            },\n            \"id_serviciosalud\": {\n                \"idservicio\": 501,\n                \"servicioSaludId\": 501\n            }\n        }\n    },\n    \"directorioMedico\": {\n        \"pk\": {\n            \"id_Ips\": {\n                \"nit\": 900111222\n            },\n            \"num_registromedico\": {\n                \"numRegistroMedico\": 1001\n            }\n        }\n    },\n    \"servicioOrden\": {\n        \"id_so\": 220,\n        \"orden\": {\n            \"pk\": {\n                \"idorden\": 220,\n                \"medicoid\": {\n                    \"numRegistroMedico\": 1001\n                },\n                \"usuarioid\": {\n                    \"usuarioid\": 15\n                }\n            }\n        },\n        \"serviciosalud\": {\n            \"idservicio\": 501,\n            \"servicioSaludId\": 501\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/agenda/new/save"
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar Disponibilidad Agenda (RF 7)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/agenda/disponibilidad/504"
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar Disponibilidad (Serializable) (RFC5)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/agenda/disponibilidad/serializable?startDate=2025-05-10&endDate=2025-05-20&idServicio=504&idMedico=1004",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"agenda",
+						"disponibilidad",
+						"serializable"
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "2025-05-10"
+						},
+						{
+							"key": "endDate",
+							"value": "2025-05-20"
+						},
+						{
+							"key": "idServicio",
+							"value": "504"
+						},
+						{
+							"key": "idMedico",
+							"value": "1004"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar Disponibilidad (Read Committed) (RFC6)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/agenda/disponibilidad/read-committed?startDate=2025-05-10&endDate=2025-05-20&idServicio=504&idMedico=1004",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"agenda",
+						"disponibilidad",
+						"read-committed"
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "2025-05-10"
+						},
+						{
+							"key": "endDate",
+							"value": "2025-05-20"
+						},
+						{
+							"key": "idServicio",
+							"value": "504"
+						},
+						{
+							"key": "idMedico",
+							"value": "1004"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agendar un servicio (Transaccional) (RF9)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/agenda/agendar?idAgenda=4&idOrden=204&idMedico=1004&idUsuario=4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"agenda",
+						"agendar"
+					],
+					"query": [
+						{
+							"key": "idAgenda",
+							"value": "4"
+						},
+						{
+							"key": "idOrden",
+							"value": "204"
+						},
+						{
+							"key": "idMedico",
+							"value": "1004"
+						},
+						{
+							"key": "idUsuario",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "1"
+		},
+		{
+			"key": "base_url",
+			"value": "https://postman-rest-api-learner.glitch.me/"
+		}
+	]
+}
