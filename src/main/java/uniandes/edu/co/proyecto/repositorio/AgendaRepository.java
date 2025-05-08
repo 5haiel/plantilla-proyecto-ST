@@ -30,6 +30,9 @@ public interface AgendaRepository extends JpaRepository<Agenda, Integer> {
     @Query(value = "SELECT * FROM agenda WHERE disponibilidad = 'Disponible' AND fecha BETWEEN :startDate AND :endDate", nativeQuery = true)
     Collection<Agenda> darAgendasPorRangoDeFechas(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
+    @Query(value = "SELECT * FROM agenda WHERE disponibilidad = 'Disponible' AND fecha BETWEEN :startDate AND :endDate FOR UPDATE", nativeQuery = true)
+    Collection<Agenda> darAgendasPorRangoDeFechasCandado(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+    
     @Query(value = "SELECT * FROM agenda WHERE disponibilidad = 'Disponible' AND directorio_servicio_serv_id = :idServicio AND fecha BETWEEN :startDate AND :endDate", nativeQuery = true)
     Collection<Agenda> darAgendasPorRangoDeFechasYServicio(@Param("idServicio") Integer idServicio, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
@@ -68,13 +71,35 @@ public interface AgendaRepository extends JpaRepository<Agenda, Integer> {
                    "JOIN servicios_medico sm ON a.servicio_medico_serv_id = sm.servicio_servicio_id " +
                    "JOIN medico m ON sm.medico_numregistromedico = m.numregistromedico " +
                    "JOIN servicio_salud s ON sm.servicio_servicio_id = s.idservicio " +
-                   "WHERE (:idServicio IS NULL OR s.idservicio = :idServicio) " +
+                   "WHERE disponibilidad = 'Disponible' AND (:idServicio IS NULL OR s.idservicio = :idServicio) " +
+                   "AND (:idMedico IS NULL OR m.numregistromedico = :idMedico) " +
+                   "AND a.fecha BETWEEN :startDate AND :endDate " +
+                   "ORDER BY a.fecha ASC FOR UPDATE",
+           nativeQuery = true)
+
+    Collection<RespuestaDisponibilidadServicio> consultarDisponibilidadSerializable(
+        @Param("idServicio") Integer idServicio,
+        @Param("startDate") LocalDate startDate,
+        @Param("endDate") LocalDate endDate,
+        @Param("idMedico") Integer idMedico
+    );
+
+    // RFC6: – CONSULTA LA AGENDA DE DISPONIBILIDAD DE UN SERVICIO DE SALUD - READ COMMITTED
+
+    @Query(value = "SELECT s.tiposervicio AS nombreServicio, " +
+                   "a.fecha AS fechaDisponibilidad, " +
+                   "m.nombre AS nombreMedico " +
+                   "FROM agenda a " +
+                   "JOIN servicios_medico sm ON a.servicio_medico_serv_id = sm.servicio_servicio_id " +
+                   "JOIN medico m ON sm.medico_numregistromedico = m.numregistromedico " +
+                   "JOIN servicio_salud s ON sm.servicio_servicio_id = s.idservicio " +
+                   "WHERE disponibilidad = 'Disponible' AND (:idServicio IS NULL OR s.idservicio = :idServicio) " +
                    "AND (:idMedico IS NULL OR m.numregistromedico = :idMedico) " +
                    "AND a.fecha BETWEEN :startDate AND :endDate " +
                    "ORDER BY a.fecha ASC",
            nativeQuery = true)
 
-    Collection<RespuestaDisponibilidadServicio> consultarDisponibilidadSerializable(
+    Collection<RespuestaDisponibilidadServicio> consultarDisponibilidadReadCommitted(
         @Param("idServicio") Integer idServicio,
         @Param("startDate") LocalDate startDate,
         @Param("endDate") LocalDate endDate,
