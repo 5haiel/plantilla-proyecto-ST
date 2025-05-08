@@ -39,6 +39,9 @@ public class AgendaServicio {
 
         // Valida la orden
         Orden orden = ordenRepository.darOrden(idOrden, idMedico, idUsuario);
+        System.out.println(idOrden);
+        System.out.println(idMedico);
+        System.out.println(idUsuario);
         if (orden == null) {
             throw new Exception("La orden de servicio no existe o no está asociada al médico y usuario indicados.");
         }
@@ -54,7 +57,7 @@ public class AgendaServicio {
             }
         }
 
-        
+
 
         // Agenda el servicio
         agendaRepository.actualizarAgenda(

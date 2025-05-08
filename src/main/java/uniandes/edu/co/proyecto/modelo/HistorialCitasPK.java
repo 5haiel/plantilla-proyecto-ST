@@ -11,7 +11,7 @@ public class HistorialCitasPK {
     @ManyToOne
     @JoinColumns({
         @JoinColumn(name = "id_cita", referencedColumnName = "idcita"),
-        @JoinColumn(name = "id_usuario", referencedColumnName = "usuarioid"),
+        @JoinColumn(name = "id_usuario", referencedColumnName = "usuario_id"),
         @JoinColumn(name = "id_orden", referencedColumnName = "id_so")
     })
     private Cita citaId;

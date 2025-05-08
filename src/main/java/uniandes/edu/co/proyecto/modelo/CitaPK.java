@@ -12,7 +12,7 @@ public class CitaPK implements Serializable {
     private Integer idcita;
 
     @ManyToOne
-    @JoinColumn(name = "usuarioid", referencedColumnName = "usuarioid")
+    @JoinColumn(name = "usuario_id", referencedColumnName = "usuario_id")
     private Usuario usuarioid;
 
     @ManyToOne

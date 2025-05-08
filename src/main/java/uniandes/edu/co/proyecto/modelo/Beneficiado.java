@@ -22,7 +22,7 @@ public class Beneficiado {
   private String parentesco;
 
   @ManyToOne
-  @JoinColumn(name = "USUARIO_USUARIO_ID", referencedColumnName = "usuarioid")
+  @JoinColumn(name = "USUARIO_USUARIO_ID", referencedColumnName = "usuario_id")
   private Usuario usuarioBeneficiador;
 
   public Beneficiado(Integer idbeneficiario, String nombreBeneficiado, String parentesco, Usuario usuarioBeneficiador) {

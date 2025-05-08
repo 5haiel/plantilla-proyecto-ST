@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 public class Usuario {
 
     @Id
-    private Integer usuarioid;
+    private Integer usuario_id;
     private String tipodocumento;
     private Integer numdocumento;
     private String nombre;
@@ -26,7 +26,7 @@ public class Usuario {
         this.fechanacimiento = fechanacimiento;
         this.telefono = telefono;
         this.tipocontribucion = tipocontribucion;
-        this.usuarioid = usuarioid;
+        this.usuario_id = usuarioid;
     }
 
     public Usuario() {;}
@@ -80,11 +80,11 @@ public class Usuario {
     }
 
     public Integer getUsuarioid() {
-        return usuarioid;
+        return usuario_id;
     }
 
     public void setUsuarioid(Integer usuarioid) {
-        this.usuarioid = usuarioid;
+        this.usuario_id = usuarioid;
     }
     
 }
